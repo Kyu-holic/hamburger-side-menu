@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+
+body {
+    font-family: "Noto Sans KR", sans-serif;
+    color: #222;
+    line-height: 1.5em;
+    font-weight: 300;
+    margin: 0;
+    /* justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100vh; */
+}
+
+a {
+    color: #222;
+    text-decoration: none;
+}
+
+/* trigger button */
+input[id="trigger"] {
+    display: none;
+}
+
+label[for="trigger"] {
+    width: 30px;
+    height: 20px;
+    /* border: 1px solid red; */
+    display: block;
+    /* relative를 absolute 변환해야 함.
+    relative는 right bottom 설정 불가 */
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    top: 50%;
+    /* 아래는 정확하게 위에서 가운데를 맞추기 위함 */
+    transform: translateY(-50%);
+    transition: 0.3s;
+}
+label[for="trigger"] span {
+    position: absolute;
+    height: 2px;
+    background-color: #000;
+    width: 100%;
+    transition: 0.3s;
+}
+label[for="trigger"] span:nth-child(1) {
+    top: 0;
+}
+label[for="trigger"] span:nth-child(2) {
+    top: 50%;
+}
+label[for="trigger"] span:nth-child(3) {
+    top: 100%;
+}
+
+/* sidebar */
+.sidebar {
+    background-color: #000;
+    width: 300px;
+    height: 100vh;
+    /* 실제로는 스크롤 중 클릭을 할 수도 있는 sidebar이기 때문에 fixed로 해야함 */
+    position: fixed;
+    right: -300px;
+    transition: 0.3s;
+}
+
+input[id="trigger"]:checked + label[for="trigger"] span:nth-child(1) {
+    top: 50%;
+    transform: rotate(45deg);
+}
+input[id="trigger"]:checked + label[for="trigger"] span:nth-child(2) {
+    opacity: 0;
+}
+input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
+    top: 50%;
+    transform: rotate(-45deg);
+}
+/* +는 인접선택자 ~는 형제선택자 */
+input[id="trigger"]:checked ~ .sidebar {
+    right: 0;
+}
+input[id="trigger"]:checked + label[for="trigger"] {
+    right: 310px;
+}
